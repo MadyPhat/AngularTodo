@@ -1,0 +1,18 @@
+{
+  "todos": [
+    {
+      "title": "Central Functionality ",
+      "description": "",
+      "deadline": "2021-09-10",
+      "complete": false,
+      "id": 1
+    },
+    {
+      "title": "Do homework",
+      "deadline": "2021-09-10",
+      "description": "",
+      "id": 2
+    }
+  ],
+  "reactive-todos": []
+}

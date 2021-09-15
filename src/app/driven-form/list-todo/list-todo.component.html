@@ -1,0 +1,313 @@
+<br>
+<div class="container d-flex justify-content-start">
+  <div class="container">
+    <div class="row">
+      <div class="d-flex">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+          <li ngbNavItem="all-todo">
+            <a ngbNavLink (click)="getTodos()">All Tasks</a>
+            <ng-template ngbNavContent>
+              <div class="card todo-view" style="width: 35rem;" *ngFor="let todo of todos let i = index"
+                [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)" #Alltask>
+                <div class="card-body">
+                  <div class="d-flex ">
+                    <div class="p-2 flex-grow-1">
+                      <h5 class="card-title">{{todo.title}}</h5>
+                    </div>
+                    <div class="p-2">
+                    </div>
+                  </div>
+                  <div *ngIf="todo.deadline !== 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">{{todo.deadline | date:'fullDate'}} at :
+                      {{todo.deadline | date:'shortTime'}}</h6>
+                  </div>
+                  <div *ngIf="todo.deadline === 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">No Deadline</h6>
+                  </div>
+                  <p class="card-text">{{todo.description}}</p>
+                  <p *ngIf="todo.complete === true "> Status : <strong class="done">COMPLETED</strong></p>
+                  <p *ngIf="todo.complete === false "> Status : <strong class="undone">PENDING</strong></p>
+                  <p *ngIf="todo.complete !== true && todo.complete !== false "> Status : <strong class="nostart">Not
+                      yet started</strong></p>
+                  <div class="d-flex justify-content-end">
+                    <div class="btn-group">
+                      <a class="btn btn-info " (click)="openModal(editTodoModal, todo)">Edit</a>
+                      <a (click)="deleteTodo(todo.id)" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li ngbNavItem="done-todo">
+            <a ngbNavLink (click)="getCompletedTodos()">Completed Tasks</a>
+            <ng-template ngbNavContent>
+              <div class="card todo-view" style="width: 35rem;" *ngFor="let todo of todos let i = index"
+                [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
+                <div class="card-body">
+                  <div class="d-flex ">
+                    <div class="p-2 flex-grow-1">
+                      <h5 class="card-title">{{todo.title}}</h5>
+                    </div>
+                    <div class="p-2">
+                    </div>
+                  </div>
+                  <div *ngIf="todo.deadline !== 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">{{todo.deadline | date:'fullDate'}} at :
+                      {{todo.deadline | date:'shortTime'}}</h6>
+                  </div>
+                  <div *ngIf="todo.deadline === 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">No Deadline</h6>
+                  </div>
+                  <p class="card-text">{{todo.description}}</p>
+                  <p *ngIf="todo.complete === true "> Status : <strong class="done">COMPLETED</strong></p>
+                  <p *ngIf="todo.complete !== true "> Status : <strong class="undone">PENDING</strong></p>
+                  <p *ngIf="todo.complete !== true && todo.complete !== false "> Status : <strong class="nostart">Not
+                      yet started</strong></p>
+                  <div class="d-flex justify-content-end">
+                    <div class="btn-group">
+                      <a class="btn btn-info " (click)="openModal(editCompleteTodoModal, todo)">Edit</a>
+                      <a (click)="deleteCompleteTodo(todo.id)" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li ngbNavItem="undone-todo">
+            <a ngbNavLink (click)="getInCompletedTodos()">Incomplete Tasks</a>
+            <ng-template ngbNavContent>
+              <div class="card todo-view" style="width: 35rem;" *ngFor="let todo of todos let i = index"
+                [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
+                <div class="card-body">
+                  <div class="d-flex ">
+                    <div class="p-2 flex-grow-1">
+                      <h5 class="card-title">{{todo.title}}</h5>
+                    </div>
+                    <div class="p-2">
+                    </div>
+                  </div>
+                  <div *ngIf="todo.deadline !== 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">{{todo.deadline | date:'fullDate'}} at :
+                      {{todo.deadline | date:'shortTime'}}</h6>
+                  </div>
+                  <div *ngIf="todo.deadline === 'No Deadline'">
+                    <h6 class="card-subtitle mb-2 text-muted">No Deadline</h6>
+                  </div>
+                  <p class="card-text">{{todo.description}}</p>
+                  <p *ngIf="todo.complete === true "> Status : <strong class="done">COMPLETED</strong></p>
+                  <p *ngIf="todo.complete !== true "> Status : <strong class="undone">PENDING</strong></p>
+                  <p *ngIf="todo.complete !== true && todo.complete !== false "> Status : <strong class="nostart">Not
+                      yet started</strong></p>
+                  <div class="d-flex justify-content-end">
+                    <div class="btn-group">
+                      <a class="btn btn-info " (click)="openModal(editInCompleteTodoModal, todo)">Edit</a>
+                      <a (click)="deleteInCompleteTodo(todo.id)" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li ngbNavItem="add-todo">
+            <a ngbNavLink (click)="getInCompletedTodos()">Add Tasks</a>
+            <ng-template ngbNavContent>
+              <app-add-todo></app-add-todo>
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="nav" class="ml-4"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #editTodoModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editTodoLabel">Edit Todo</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="title" class="col-sm-4 col-form-label">Title</label>
+        <div class="col-sm-8">
+          <input type="text" formControlName="title" id="title" [ngClass]="{'form-control': true, 
+      'is-invalid': !editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched,
+      'is-valid': editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched}" required id="InputTitle"
+            aria-describedby="titleHelp" placeholder="Enter title">
+          <small id="titleHelp" class="form-text text-muted"
+            *ngIf="editTodoForm.controls.title?.errors?.required && editTodoForm.controls.title?.touched">What do you
+            want to do?</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="description" class="col-sm-4 col-form-label">Description</label>
+        <div class="col-sm-8">
+          <textarea type="text" class="form-control" formControlName="description" id="description" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Deadline</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="deadline" id="deadline"
+            pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" [ngClass]="{'form-control': true,
+            'is-invalid': !editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched,
+            'is-valid': editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched}">
+          <small
+            *ngIf="editTodoForm.controls.deadline?.errors?.pattern && editTodoForm.controls.deadline?.touched"
+            class="form-text custom-invalid-feedback">
+            Input must following YYYY/MM/DD
+          </small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Completed?</label>
+        <div class="col-sm-8">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="complete"
+            id="complete">
+            <label ngbButtonLabel class="btn-success">
+              <input ngbButton type="radio" [value]="true"> Completed
+            </label>
+            <label ngbButtonLabel class="btn-warning">
+              <input ngbButton type="radio" [value]="false"> Incomplete
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" [disabled]="!editTodoForm.valid" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #editCompleteTodoModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editTodoLabel">Edit Todo</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="title" class="col-sm-4 col-form-label">Title</label>
+        <div class="col-sm-8">
+          <input type="text" formControlName="title" id="title" [ngClass]="{'form-control': true, 
+      'is-invalid': !editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched,
+      'is-valid': editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched}" required id="InputTitle"
+            aria-describedby="titleHelp" placeholder="Enter title">
+          <small id="titleHelp" class="form-text text-muted"
+            *ngIf="editTodoForm.controls.title?.errors?.required && editTodoForm.controls.title?.touched">What do you
+            want to do?</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="description" class="col-sm-4 col-form-label">Description</label>
+        <div class="col-sm-8">
+          <textarea type="text" class="form-control" formControlName="description" id="description" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Deadline</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="deadline" id="deadline"
+            pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" [ngClass]="{'form-control': true,
+            'is-invalid': !editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched,
+            'is-valid': editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched}">
+          <small
+            *ngIf="editTodoForm.controls.deadline?.errors?.pattern && editTodoForm.controls.deadline?.touched"
+            class="form-text custom-invalid-feedback">
+            Input must following YYYY/MM/DD
+          </small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Completed?</label>
+        <div class="col-sm-8">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="complete"
+            id="complete">
+            <label ngbButtonLabel class="btn-success">
+              <input ngbButton type="radio" [value]="true"> Completed
+            </label>
+            <label ngbButtonLabel class="btn-warning">
+              <input ngbButton type="radio" [value]="false"> Incomplete
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" [disabled]="!editTodoForm.valid" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="completePageModalSubmit()">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editInCompleteTodoModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editTodoLabel">Edit Todo</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="title" class="col-sm-4 col-form-label">Title</label>
+        <div class="col-sm-8">
+          <input type="text" formControlName="title" id="title" [ngClass]="{'form-control': true, 
+      'is-invalid': !editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched,
+      'is-valid': editTodoForm.controls.title?.valid && editTodoForm.controls.title?.touched}" required id="InputTitle"
+            aria-describedby="titleHelp" placeholder="Enter title">
+          <small id="titleHelp" class="form-text text-muted"
+            *ngIf="editTodoForm.controls.title?.errors?.required && editTodoForm.controls.title?.touched">What do you
+            want to do?</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="description" class="col-sm-4 col-form-label">Description</label>
+        <div class="col-sm-8">
+          <textarea type="text" class="form-control" formControlName="description" id="description" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Deadline</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="deadline" id="deadline"
+            pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" [ngClass]="{'form-control': true,
+            'is-invalid': !editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched,
+            'is-valid': editTodoForm.controls.deadline?.valid && editTodoForm.controls.deadline?.touched}">
+          <small
+            *ngIf="editTodoForm.controls.deadline?.errors?.pattern && editTodoForm.controls.deadline?.touched"
+            class="form-text custom-invalid-feedback">
+            Input must following YYYY/MM/DD
+          </small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deadline" class="col-sm-4 col-form-label">Completed?</label>
+        <div class="col-sm-8">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="complete"
+            id="complete">
+            <label ngbButtonLabel class="btn-success">
+              <input ngbButton type="radio" [value]="true"> Completed
+            </label>
+            <label ngbButtonLabel class="btn-warning">
+              <input ngbButton type="radio" [value]="false"> Incomplete
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="button" [disabled]="!editTodoForm.valid" class="btn btn-primary" (click)="inCompletePageModalSubmit()">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

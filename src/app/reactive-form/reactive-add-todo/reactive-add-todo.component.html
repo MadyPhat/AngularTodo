@@ -1,0 +1,71 @@
+<div *ngIf="!submitted">
+  <div style="padding-right:15px;" class="container-fluid">
+
+    <!-- form header -->
+    <div class="row">
+      <div class="col">
+        <h1>Add Todo</h1>
+        <hr>
+      </div>
+    </div>
+  
+    <!-- main form -->
+    <div class="row">
+      <form action="" style="width:100%;" [formGroup]="reactiveForm">
+        <div class="col">
+  
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="fnText">Title</label>
+                <input type="text" [ngClass]="{'form-control': true, 
+                'is-invalid': !title.valid && title.touched, 'is-valid': title.valid && title.touched}"
+                  formControlName="title" id="fnText">
+                <small *ngIf="title.errors?.required && title.touched" id="fnHelp"
+                  class="form-text custom-invalid-feedback">What do you want to do?</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="lnText">Description</label>
+                <textarea type="text" [ngClass]="{'form-control': true}" formControlName="description"
+                  id="lnText"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="lnText">Deadline</label>
+                <input type="date" [ngClass]="{'form-control': true}" formControlName="deadline"
+                  id="lnText" placeholder="yy-mm-dd" ngbDatepicker #d="ngbDatepicker">
+              </div>
+            </div>
+          </div>
+  
+  
+          <!-- seperator -->
+          <div class="row">
+            <div class="col">
+              <hr>
+            </div>
+          </div>
+  
+          <!-- final action buttons -->
+          <div class="row justify-content-center">
+            <div class="col-2">
+              <button type="button" [disabled]="!reactiveForm.valid" (click)="submitHandler()" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="submitted">
+  <h3>Successfully added to todo list!</h3>
+  <button class="btn btn-success" (click)="newTodo()">New..</button>
+</div>

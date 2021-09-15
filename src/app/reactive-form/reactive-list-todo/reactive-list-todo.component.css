@@ -1,0 +1,16 @@
+.todo-view{
+    margin: 10px;
+}
+.done{
+    color: green;
+}
+.undone{
+    color: orange;
+}
+
+.switch input { 
+    display:none;
+}
+.nostart{
+    color: black;
+}
