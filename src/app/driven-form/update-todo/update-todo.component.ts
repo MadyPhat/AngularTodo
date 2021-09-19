@@ -11,6 +11,8 @@ export class UpdateTodoComponent implements OnInit {
 
 currentTodo: any = null;
 message = '';
+status = ['todo', 'in progress', 'pending', 'completed', 'closed'];
+priority = ['low','normal', 'medium', 'high', 'urgent'];
 
   constructor(
     private drivenTodoService: DrivenFormTodoService,

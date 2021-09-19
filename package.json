@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@syncfusion/ej2-angular-grids": "^19.2.62",
+    "@syncfusion/ej2-angular-lists": "^19.2.60",
     "bootstrap": "^4.5.0",
     "faker": "^5.5.3",
     "json-server": "^0.16.3",

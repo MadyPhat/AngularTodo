@@ -5,5 +5,5 @@ export interface ReactiveTodo {
     title: string
     description: string
     deadline: Deadline
-    complete: boolean
+    status: string
 }

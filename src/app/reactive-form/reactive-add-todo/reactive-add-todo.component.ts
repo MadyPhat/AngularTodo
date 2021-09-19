@@ -13,6 +13,7 @@ export class ReactiveAddTodoComponent implements OnInit {
   submitted = false;
   todo: any = [];
   reactiveForm: any;
+  priority = ['low','normal', 'medium', 'hight', 'urgent'];
 
   constructor(
     private reactiveFormTodo: ReactiveFormTodoService,
@@ -24,7 +25,8 @@ export class ReactiveAddTodoComponent implements OnInit {
       title: [null, [Validators.required]],
       description: [null],
       deadline: [null],
-      complete: [null]
+      status: ['todo'],
+      priority: ['low']
     })
   }
 
@@ -43,6 +45,8 @@ export class ReactiveAddTodoComponent implements OnInit {
       title: '',
       description: '',
       deadline: '',
+      status: 'todo',
+      priority: 'low'
     };
   }
 

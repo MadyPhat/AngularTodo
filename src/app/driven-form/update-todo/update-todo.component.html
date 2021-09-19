@@ -1,65 +1,65 @@
 <div style="width: 500px; margin: auto;">
-    <div *ngIf="currentTodo" class="edit-form">
-      <h4>Todo</h4>
-      <form>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            [(ngModel)]="currentTodo.title"
-            name="title"
-          />
+  <div *ngIf="currentTodo" class="edit-form container-sm shadow p-3 mb-5 bg-body" style="width: 35rem;">
+    <legend>Update</legend>
+    <form #todoForm="ngForm">
+      <div class="form-group">
+        <label for="exampleInputTitle" class="form-label mt-4">Title</label>
+        <input type="text" [(ngModel)]="currentTodo.title" name="title" #title="ngModel" [ngClass]="{'form-control': true, 
+          'is-invalid': !title?.valid,
+          'is-valid': title?.valid}" required id="InputTitle" aria-describedby="titleHelp" placeholder="Enter title">
+        <small id="titleHelp" class="form-text text-danger" *ngIf="title?.errors?.required">What do you want to
+          do?</small>
+      </div>
+      <div class="form-group">
+        <label for="description" class="form-label mt-4">Description</label>
+        <textarea type="text" class="form-control" id="description" [(ngModel)]="currentTodo.description"
+          name="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deadline" class="form-label mt-4">Deadline : YYYY/MM/DD</label>
+        <input [(ngModel)]="currentTodo.deadline" name="deadline" id="InputDeadline"
+          pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" #deadline="ngModel" [ngClass]="{'form-control': true, 
+          'is-invalid': !deadline?.valid && deadline?.touched,
+          'is-valid': deadline.valid && deadline.touched}">
+        <small *ngIf="deadline?.errors?.pattern && deadline?.touched" class="form-text custom-invalid-feedback">
+          Input must following YYYY/MM/DD
+        </small>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="inputPriority" class="form-label mt-4">Priority</label>
+            <select class="form-select" ngModel name="priority" id="inputPriority" [(ngModel)]="currentTodo.priority">
+              <option *ngFor="let item of priority" [value]="item">{{item}}</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [(ngModel)]="currentTodo.description"
-            name="description"
-          />
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="inputStatus" class="form-label mt-4">Status</label>
+            <select class="form-select" ngModel name="status" id="inputStatus" [(ngModel)]="currentTodo.status">
+              <option *ngFor="let item of status" [value]="item">{{item}}</option>
+            </select>
+          </div>
         </div>
-  
-        <div class="form-group">
-          <label><strong>Status:</strong></label>
-  
+      </div>
+      <br>
+      <div class="row">
+        <div class="d-flex justify-content-end">
+          <button type="button" [disabled]="!todoForm.form.valid" class="btn btn-primary"
+            (click)="updateTodo()">Update</button>
         </div>
-      </form>
-  
-      <button
-        class="badge badge-primary mr-2"
-        *ngIf="currentTodo.completed"
-        (click)="setAvailableStatus(false)"
-      >
-        Set Not Available
-      </button>
-      <button
-        *ngIf="!currentTodo.completed"
-        class="badge badge-primary mr-2"
-        (click)="setAvailableStatus(true)"
-      >
-        Set Available
-      </button>
-  
-      <button class="badge badge-danger mr-2" (click)="deleteTodo()">
-        Delete
-      </button>
-  
-      <button
-        type="submit"
-        class="badge badge-success"
-        (click)="updateTodo()"
-      >
-        Update
-      </button>
-      <p></p>
-    </div>
-  
-    <div *ngIf="!currentTodo">
-      <br />
-      <p>This product is not accessible</p>
-    </div>
+      </div>
+    </form>
   </div>
+
+  <div *ngIf="!currentTodo">
+    <br />
+    <p>This product is not accessible</p>
+  </div>
+</div>

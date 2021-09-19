@@ -10,13 +10,14 @@ import { DrivenFormTodoService } from '../service/driven-form-todo.service';
   styleUrls: ['./list-todo.component.css']
 })
 export class ListTodoComponent implements OnInit {
-  editTodoForm!: FormGroup;
+
   active = 'all-todo';
-  status: any;
   todos: any = [];
   currentTodo: any;
   currentIndex = -1;
-  formData: any;
+  userInput!: null;
+  status = ['todo', 'in progress', 'pending', 'completed', 'closed'];
+  priority = ['low','normal', 'medium', 'high', 'urgent'];
 
   constructor(
     private drivenFormTodo: DrivenFormTodoService,
@@ -27,13 +28,6 @@ export class ListTodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTodos();
-
-    this.editTodoForm = this.fb.group({
-      title: [''],
-      description: [''],
-      deadline: [''],
-      complete: ['']
-    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -64,88 +58,39 @@ export class ListTodoComponent implements OnInit {
     })
   }
 
-  getCompletedTodos() {
-    this.todos = null;
-    this.status = true;
-    this.drivenFormTodo.getStatus(this.status).subscribe(res => {
-      this.todos = res;
-      console.log(this.todos);
-    })
-  }
-
-  getInCompletedTodos() {
-    this.todos = null;
-    this.status = false;
-    this.drivenFormTodo.getStatus(this.status).subscribe(res => {
-      this.todos = res;
-      console.log(this.todos);
-    })
-  }
-
-  updateTodo(data: any) {
-    this.drivenFormTodo.updateTodo(this.currentTodo.id, data).subscribe(res => {
-      console.log(res);
-    })
+  goToUpdate(index: any){
+    this.router.navigate([`/driven/update/${index}`]);
   }
 
   deleteTodo(id: any) {
     this.drivenFormTodo.deleteTodo(id).subscribe(res => {
       this.getTodos();
+      this.modalService.dismissAll();
       console.log(res);
     })
   }
 
-  deleteCompleteTodo(id: any) {
-    this.drivenFormTodo.deleteTodo(id).subscribe(res => {
-      this.getCompletedTodos();
-      console.log(res);
-    })
-  }
-
-  deleteInCompleteTodo(id: any) {
-    this.drivenFormTodo.deleteTodo(id).subscribe(res => {
-      this.getInCompletedTodos();
-      console.log(res);
-    })
-  }
-
-  openModal(targetModal: any, todo: { title: any; description: any; deadline: any; complete: any }) {
+  openModal(targetModal: any) {
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static'
     });
-
-    this.editTodoForm.patchValue({
-      title: todo.title,
-      description: todo.description,
-      deadline: todo.deadline,
-      complete: todo.complete
-    });
-  }
-  onSubmit() {
-    this.updateTodo(this.editTodoForm.value);
-    this.resfresh();
-    this.modalService.dismissAll();
-    // console.log("res:", this.editTodoForm.getRawValue());
-    console.log(this.editTodoForm.value)
   }
 
-  completePageModalSubmit() {
-    this.updateTodo(this.editTodoForm.value);
-    this.getCompletedTodos();
-    this.modalService.dismissAll();
-    // console.log("res:", this.editTodoForm.getRawValue());
-    console.log(this.editTodoForm.value)
+  filterTodo(){
+    console.log(this.userInput);
+    if(this.userInput !== null){
+      this.drivenFormTodo.sortByPriorityTodo(this.userInput).subscribe(res =>{
+        this.todos = res;
+      })
+    }else{
+      this.resfresh();
+      console.log('Nothing Selected')
+    }
   }
 
-  inCompletePageModalSubmit() {
-    this.updateTodo(this.editTodoForm.value);
-    this.getInCompletedTodos();
-    this.modalService.dismissAll();
-    // console.log("res:", this.editTodoForm.getRawValue());
-    console.log(this.editTodoForm.value)
+  reset(){
+    this.userInput = null;
+    this.getTodos();
   }
-
-
-
 }

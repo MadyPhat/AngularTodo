@@ -8,13 +8,15 @@ import { ListTodoComponent } from './list-todo/list-todo.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { UpdateTodoComponent } from './update-todo/update-todo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DrivenDashboardComponent } from './driven-dashboard/driven-dashboard.component';
 
 
 @NgModule({
   declarations: [
     ListTodoComponent,
     AddTodoComponent,
-    UpdateTodoComponent
+    UpdateTodoComponent,
+    DrivenDashboardComponent
   ],
   imports: [
     CommonModule,

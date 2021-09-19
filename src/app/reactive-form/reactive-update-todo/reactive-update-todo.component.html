@@ -1,0 +1,93 @@
+<div class=" container-sm shadow p-3 mb-5 bg-body" style="width: 35rem;">
+    <div *ngIf="currentTodo">
+      <div style="padding-right:15px;" class="container-fluid">
+    
+        <!-- form header -->
+        <div class="row">
+          <div class="col text-primary">
+            <h3>Update</h3>
+            <hr>
+          </div>
+        </div>
+      
+        <!-- main form -->
+        <div class="row">
+          <form action="" style="width:100%;" [formGroup]="reactiveForm">
+            <div class="col">
+      
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="fnText">Title</label>
+                    <input type="text" [ngClass]="{'form-control': true, 
+                    'is-invalid': !title.valid , 'is-valid': title.valid }"
+                      formControlName="title" id="fnText" [(ngModel)]="currentTodo.title">
+                    <small *ngIf="title.errors?.required" id="fnHelp"
+                      class="form-text custom-invalid-feedback">What do you want to do?</small>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="InputDescription">Description</label>
+                    <textarea type="text" [ngClass]="{'form-control': true}" formControlName="description"
+                      id="InputDescription" [(ngModel)]="currentTodo.description"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="lnText">Deadline</label>
+                    <input type="date" [ngClass]="{'form-control': true}" formControlName="deadline"
+                      id="inputDeadline" placeholder="yy-mm-dd" [(ngModel)]="currentTodo.deadline" ngbDatepicker #d="ngbDatepicker">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputPriority">Priority</label>
+                    <select class="form-select" formControlName="priority" id="inputPriority" [(ngModel)]="currentTodo.priority">
+                      <option *ngFor="let item of priority" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputStatus">Status</label>
+                    <select class="form-select" formControlName="status" id="inputStatus" [(ngModel)]="currentTodo.status">
+                      <option *ngFor="let item of status" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+      
+      
+              <!-- seperator -->
+              <div class="row">
+                <div class="col text-primary">
+                  <hr>
+                </div>
+              </div>
+      
+              <!-- final action buttons -->
+              <div class="row justify-content-end">
+                <div class="col-2">
+                  <button type="button" [disabled]="!reactiveForm.valid" (click)="submitHandler()" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="!currentTodo">
+      <h3>Can't access to Todo</h3>
+    </div>
+  </div>

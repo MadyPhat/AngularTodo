@@ -22,7 +22,7 @@ export class ReactiveFormTodoService {
   }
 
   getStatus(status: any): Observable<ReactiveTodo[]>{
-    return this.httpClient.get<ReactiveTodo[]>(`${_API}?complete=${status}`);
+    return this.httpClient.get<ReactiveTodo[]>(`${_API}?status=${status}`);
   }
 
   addTodo(data: any): Observable<ReactiveTodo[]> {
@@ -35,6 +35,10 @@ export class ReactiveFormTodoService {
 
   deleteTodo(id: any): Observable<ReactiveTodo> {
     return this.httpClient.delete<ReactiveTodo>(`${_API}/${id}`);
+  }
+
+  sortByPriorityTodo(keyword: any): Observable<ReactiveTodo>{
+    return this.httpClient.get<ReactiveTodo>(`${_API}?priority=${keyword}`)
   }
 
 }

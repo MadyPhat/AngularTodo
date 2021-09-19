@@ -33,6 +33,10 @@ export class DrivenFormTodoService {
     return this.httpClient.put<Todo>(`${_API}/${id}`, data);
   }
 
+  sortByPriorityTodo(keyword: any): Observable<Todo>{
+    return this.httpClient.get<Todo>(`${_API}?priority=${keyword}`)
+  }
+
   deleteTodo(id: any): Observable<Todo> {
     return this.httpClient.delete<Todo>(`${_API}/${id}`);
   }

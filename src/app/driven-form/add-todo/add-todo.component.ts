@@ -12,8 +12,14 @@ export class AddTodoComponent implements OnInit {
   constructor(private drivenFormTodo: DrivenFormTodoService) { }
 
   submitted = false;
-  todo: any = []
-  ngOnInit(): void { }
+  todo: any = [];
+  priority = ['low','normal', 'medium', 'hight', 'urgent'];
+  ngOnInit(): void {
+    this.todo = {
+      status: 'todo',
+      priority: 'low'
+    }
+  }
 
   saveTodo(data: any) {
     this.drivenFormTodo.addTodo(data).subscribe(res => {
@@ -30,12 +36,14 @@ export class AddTodoComponent implements OnInit {
       title: '',
       description: '',
       deadline: '',
+      status: 'todo',
+      priority: 'low',
     };
   }
 
   submitHandler(form: any) {
     this.saveTodo(form.value);
-    console.log(form.value.deadline);
+    // console.log(form.value);
   }
 
 }

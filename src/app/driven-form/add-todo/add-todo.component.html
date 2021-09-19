@@ -1,51 +1,55 @@
-<div class="container">
-  <form #ngForm="ngForm">
+<div class=" container-sm shadow p-3 mb-5 bg-body" style="width: 35rem;">
+  <form #todoForm="ngForm">
     <fieldset>
       <legend>Add Todo</legend>
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="exampleInputTitle" class="form-label mt-4">Todo Title</label>
-          <input type="text" ngModel name="title" 
-          #title="ngModel"
-          [ngClass]="{'form-control': true, 
-          'is-invalid': !title?.valid && title?.touched,
-          'is-valid': title?.valid && title?.touched}"
-          required
-          id="InputTitle" 
-          aria-describedby="titleHelp"
-            placeholder="Enter title">
-          <small id="titleHelp" class="form-text text-muted"
-          *ngIf="title?.errors?.required && title?.touched"
-          >What do you want to do?</small>
+          <label for="exampleInputTitle" class="form-label mt-4">Title</label>
+          <input type="text" ngModel name="title" #title="ngModel" [ngClass]="{'form-control': true, 
+          'is-invalid': !title?.valid,
+          'is-valid': title?.valid}" required id="InputTitle" aria-describedby="titleHelp" placeholder="Enter title">
+          <small id="titleHelp" class="form-text text-danger" *ngIf="title?.errors?.required">What do you want to
+            do?</small>
         </div>
+
         <div class="form-group">
-          <input type="hidden" id="deadline" ngModel name="deadline" [value]="'No Deadline'">
+          <input type="hidden" id="status" ngModel name="status" value="low" [(ngModel)]="todo.status">
         </div>
-        
+
         <div class="form-group">
-          <label for="description" class="form-label mt-4">Todo Description</label>
+          <label for="description" class="form-label mt-4">Description</label>
           <textarea ngModel name="description" class="form-control" id="InputDescription" rows="3"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="deadline" class="form-label mt-4">Deadline</label>
-          <input ngModel name="deadline" id="InputDeadline" 
-          pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
-          #deadline = "ngModel"
-          [ngClass]="{'form-control': true, 
+          <label for="deadline" class="form-label mt-4">Deadline : YYYY/MM/DD</label>
+          <input ngModel name="deadline" id="InputDeadline" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            #deadline="ngModel" [ngClass]="{'form-control': true, 
           'is-invalid': !deadline?.valid && deadline?.touched,
           'is-valid': deadline.valid && deadline.touched}">
-          <small
-          *ngIf="deadline?.errors?.pattern && deadline?.touched"
-          class="form-text custom-invalid-feedback">
-          Input must following YYYY/MM/DD
-        </small>
+          <small *ngIf="deadline?.errors?.pattern && deadline?.touched" class="form-text custom-invalid-feedback">
+            Input must following YYYY/MM/DD
+          </small>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="inputPriority" class="form-label mt-4">Priority</label>
+              <select class="form-select" ngModel name="priority" id="inputPriority" [(ngModel)]="todo.priority">
+                <option *ngFor="let item of priority" [value]="item">{{item}}</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <br>
-        <button type="button" [disabled]="!ngForm.form.valid" class="btn btn-primary" (click)="submitHandler(ngForm)">Save</button>
+        <div class="d-flex justify-content-end">
+          <button type="button" [disabled]="!todoForm.form.valid" class="btn btn-primary"
+            (click)="submitHandler(todoForm)">Save</button>
+        </div>
       </div>
-      
+
       <div *ngIf="submitted">
         <h3>Successfully added to todo list!</h3>
         <button class="btn btn-success" (click)="newTodo()">New..</button>
@@ -53,5 +57,3 @@
     </fieldset>
   </form>
 </div>
-
-  

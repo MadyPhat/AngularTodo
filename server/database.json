@@ -1,18 +1,50 @@
 {
   "todos": [
     {
-      "title": "Central Functionality ",
+      "title": "XPS 13",
+      "status": "pending",
       "description": "",
-      "deadline": "2021-09-10",
-      "complete": false,
-      "id": 1
-    },
-    {
-      "title": "Do homework",
-      "deadline": "2021-09-10",
-      "description": "",
-      "id": 2
+      "deadline": "2021-09-26",
+      "priority": "normal",
+      "id": 16
     }
   ],
-  "reactive-todos": []
+  "reactive-todos": [
+    {
+      "title": "Read Book",
+      "description": null,
+      "deadline": {
+        "year": 2021,
+        "month": 9,
+        "day": 18
+      },
+      "status": "todo",
+      "priority": "urgent",
+      "id": 2
+    },
+    {
+      "title": "Finish the project",
+      "description": "Finish all function",
+      "deadline": {
+        "year": 2021,
+        "month": 9,
+        "day": 30
+      },
+      "status": "todo",
+      "priority": "medium",
+      "id": 3
+    },
+    {
+      "title": "Do whatever I want",
+      "description": null,
+      "deadline": {
+        "year": 2021,
+        "month": 9,
+        "day": 25
+      },
+      "status": "in progress",
+      "priority": "low",
+      "id": 4
+    }
+  ]
 }
