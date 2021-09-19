@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 
-#To run project
+# To run project
 
 Install Json server
 `npm i json-server --save`
@@ -12,7 +12,7 @@ install Faker
 
 run server
 `npm run server`
-run project 
+run app 
 `ng serve`
 
 ## Development server
