@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReactiveFormTodoService } from '../service/reactivea-form-todo.service';
+import { TodoService } from './../../service/todo.service';
+import { Todo } from './../../interface/todo';
+import { Priority } from './../../data/priority';
+import { Status } from './../../data/status';
+import { Deadline } from 'src/app/interface/deadline';
 
 @Component({
   selector: 'app-reactive-update-todo',
@@ -10,14 +14,14 @@ import { ReactiveFormTodoService } from '../service/reactivea-form-todo.service'
 })
 export class ReactiveUpdateTodoComponent implements OnInit {
 
-  currentTodo: any = null;
+  currentTodo: Todo | undefined;
   message = '';
-  priority = ['low','normal', 'medium', 'high', 'urgent'];
-  status = ['todo', 'in progress', 'pending', 'completed', 'closed']
+  priority: Array<string> = Priority;
+  status: Array<string> = Status;
   reactiveForm: any;
 
   constructor(
-    private reactiveTodo : ReactiveFormTodoService,
+    private todoSerive: TodoService,
     private route: ActivatedRoute,
     private router: Router,
     private _fb: FormBuilder
@@ -38,9 +42,9 @@ export class ReactiveUpdateTodoComponent implements OnInit {
   }
 
   getTodo(id: any){
-    this.reactiveTodo.getATodo(id).subscribe(res =>{
+    this.todoSerive.getATodo(id).subscribe((res: Todo) =>{
       this.currentTodo = res;
-    }, error=>{
+    },error => {
       console.log(error);
     })
   }
@@ -48,12 +52,21 @@ export class ReactiveUpdateTodoComponent implements OnInit {
   get title(){
     return this.reactiveForm.get('title');
   }
+  
+  dateToString(newDate: Deadline) {
+    let year = newDate.year;
+    let month = newDate.month;
+    let day = newDate.day;
 
-  updateTodo(data: any){
-    this.reactiveTodo.updateTodo(this.currentTodo.id, data).subscribe(()=>{
+    this.reactiveForm.value.deadline = year+ '-'+ month + '-' + day;
+    return this.reactiveForm.value.deadline;
+  }
+
+  updateTodo(data: Todo){
+    this.todoSerive.updateTodo(this.currentTodo!.id, data).subscribe(()=>{
       this.message = 'Todo Updated';
       this.router.navigate([`/reactive`]);
-    }, error =>{
+    }, (error: any) =>{
       console.log(error);
     })
   }

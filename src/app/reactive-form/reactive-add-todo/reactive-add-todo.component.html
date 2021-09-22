@@ -2,7 +2,6 @@
   <div *ngIf="!submitted">
     <div style="padding-right:15px;" class="container-fluid">
   
-      <!-- form header -->
       <div class="row">
         <div class="col text-primary">
           <h3>Add Todo</h3>
@@ -10,7 +9,6 @@
         </div>
       </div>
     
-      <!-- main form -->
       <div class="row">
         <form action="" style="width:100%;" [formGroup]="reactiveForm">
           <div class="col">
@@ -41,7 +39,7 @@
                 <div class="form-group">
                   <label for="lnText">Deadline</label>
                   <input type="date" [ngClass]="{'form-control': true}" formControlName="deadline"
-                    id="inputDeadline" placeholder="mm-dd-yyyy" ngbDatepicker #d="ngbDatepicker">
+                    id="inputDeadline" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateToString($event)">
                 </div>
               </div>
             </div>
@@ -56,15 +54,12 @@
               </div>
             </div>
     
-    
-            <!-- seperator -->
             <div class="row">
               <div class="col text-primary">
                 <hr>
               </div>
             </div>
-    
-            <!-- final action buttons -->
+
             <div class="row justify-content-end">
               <div class="col-2">
                 <button type="button" [disabled]="!reactiveForm.valid" (click)="submitHandler()" class="btn btn-primary">Save</button>

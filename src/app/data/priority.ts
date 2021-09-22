@@ -1,0 +1,1 @@
+export const Priority: Array<string> = ['low','normal', 'medium', 'high', 'urgent'];

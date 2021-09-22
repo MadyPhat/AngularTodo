@@ -17,13 +17,13 @@
       </div>
 
       <div class="form-group">
-        <label for="deadline" class="form-label mt-4">Deadline : YYYY/MM/DD</label>
+        <label for="deadline" class="form-label mt-4">Deadline : YYYY-MM-DD</label>
         <input [(ngModel)]="currentTodo.deadline" name="deadline" id="InputDeadline"
           pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" #deadline="ngModel" [ngClass]="{'form-control': true, 
           'is-invalid': !deadline?.valid && deadline?.touched,
           'is-valid': deadline.valid && deadline.touched}">
         <small *ngIf="deadline?.errors?.pattern && deadline?.touched" class="form-text custom-invalid-feedback">
-          Input must following YYYY/MM/DD
+          Input must following YYYY-MM-DD
         </small>
       </div>
 

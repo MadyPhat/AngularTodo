@@ -9,6 +9,7 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 import { UpdateTodoComponent } from './update-todo/update-todo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DrivenDashboardComponent } from './driven-dashboard/driven-dashboard.component';
+import { ListTodoModule } from '../list-todo/list-todo.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DrivenDashboardComponent } from './driven-dashboard/driven-dashboard.co
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    ListTodoModule
   ],
 })
 export class DrivenFormModule { }

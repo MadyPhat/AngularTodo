@@ -1,0 +1,1 @@
+export const Status: Array<string> = ['todo', 'in progress', 'pending', 'completed', 'closed'];

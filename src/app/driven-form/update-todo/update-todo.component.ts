@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DrivenFormTodoService } from './../service/driven-form-todo.service';
+import { TodoService } from 'src/app/service/todo.service';
+import { Status } from './../../data/status';
+import { Priority } from './../../data/priority';
+import { Todo } from 'src/app/interface/todo';
 
 @Component({
   selector: 'app-update-todo',
@@ -9,13 +12,13 @@ import { DrivenFormTodoService } from './../service/driven-form-todo.service';
 })
 export class UpdateTodoComponent implements OnInit {
 
-currentTodo: any = null;
+currentTodo!: Todo;
 message = '';
-status = ['todo', 'in progress', 'pending', 'completed', 'closed'];
-priority = ['low','normal', 'medium', 'high', 'urgent'];
+status: Array<string> = Status;
+priority: Array<string> = Priority;
 
   constructor(
-    private drivenTodoService: DrivenFormTodoService,
+    private todoService: TodoService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -26,7 +29,7 @@ priority = ['low','normal', 'medium', 'high', 'urgent'];
   }
 
   getTodo(id: any){
-    this.drivenTodoService.getATodo(id).subscribe(todo =>{
+    this.todoService.getATodo(id).subscribe(todo =>{
       this.currentTodo = todo;
       console.log(this.currentTodo);
     }, error =>{
@@ -34,20 +37,9 @@ priority = ['low','normal', 'medium', 'high', 'urgent'];
     });
   }
 
-  setAvailableStatus(status: any): void {
-    const data = {
-      title: this.currentTodo.title,
-      description: this.currentTodo.description,
-      completed: status
-    };
-
-    this.drivenTodoService.updateTodo(this.currentTodo.id, data).subscribe(res =>{
-      this.currentTodo.completed = status;
-    })
-  }
 
   updateTodo(){
-    this.drivenTodoService.updateTodo(this.currentTodo.id, this.currentTodo).subscribe(res =>{
+    this.todoService.updateTodo(this.currentTodo.id, this.currentTodo).subscribe(res =>{
       this.message = 'Updated';
       this.router.navigate(['/driven'])
     }, error =>{
@@ -56,8 +48,7 @@ priority = ['low','normal', 'medium', 'high', 'urgent'];
   }
 
   deleteTodo(){
-    this.drivenTodoService.deleteTodo(this.currentTodo.id).subscribe(res =>{
-      console.log(res);
+    this.todoService.deleteTodo(this.currentTodo.id).subscribe(res =>{
       this.router.navigate(['driven']);
     })
   }

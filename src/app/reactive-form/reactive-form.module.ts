@@ -8,6 +8,7 @@ import { ReactiveAddTodoComponent } from './reactive-add-todo/reactive-add-todo.
 import { ReactiveListTodoComponent } from './reactive-list-todo/reactive-list-todo.component';
 import { ReactiveDashboardComponent } from './reactive-dashboard/reactive-dashboard.component';
 import { ReactiveUpdateTodoComponent } from './reactive-update-todo/reactive-update-todo.component';
+import { ListTodoModule } from '../list-todo/list-todo.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReactiveUpdateTodoComponent } from './reactive-update-todo/reactive-upd
     ReactiveFormRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ListTodoModule
   ]
 })
 export class ReactiveFormModule { }
