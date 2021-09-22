@@ -10,14 +10,20 @@ Install Json server
 install Faker
 `npm i faker --save`
 
-run server
-`npm run server`
-run app 
-`ng serve`
+This Todo app is using Bootswatch theme. By default it will use default bootstrap after run 
+`npm install`
 
-## Development server
+Go to https://bootswatch.com/yeti/ then download [bootstrap.min.css](https://bootswatch.com/5/yeti/bootstrap.min.css)
 
+Then in project folder to `node_modules/bootstrap/dist/css` 
+replace default `bootstrap.min.css` with new downloaded `bootstrap.min.css`
+
+run api server
+run `npm run server`
+
+run development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
 
 ## Code scaffolding
 
