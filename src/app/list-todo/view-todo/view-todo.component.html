@@ -18,12 +18,13 @@
       <br>
       <h2>{{s | titlecase}}</h2>
     </div>
-    <div class="list-group" style="width: rem;" *ngFor="let todo of todos | orderBy: -order; let i = index"
+    <div *ngFor="let p of priority">
+      <div class="list-group" style="width: rem;" *ngFor="let todo of todos let i = index"
       [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
       <div [ngClass]="{
         'list-group-item': true,
         'list-group-item-action': true, 
-        'list-group-item-danger': todo.priority ==='high' || todo.priority ==='urgent'}" *ngIf="todo.status === s">
+        'list-group-item-danger': todo.priority ==='high' || todo.priority ==='urgent'}" *ngIf="todo.status === s && todo.priority === p">
         <div class="d-flex w-100 justify-content-between">
           <h5 [ngClass]="{'mb-1': true}">{{todo.title}}</h5>
           <small>
@@ -42,6 +43,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
   
@@ -67,3 +69,19 @@
       </div>
     </div>
   </ng-template>
+
+  <!-- <ul *ngFor="let todo of todos | orderBy: -priority">
+    <li>
+      {{todo.priority}}
+    </li>
+  </ul> -->
+
+  <!-- <ul *ngFor="let s of status | orderBy: -status">
+    <li>
+      {{s}}
+    </li>
+  </ul> -->
+
+  <ul *ngFor="let p of priority | orderBy: priority">
+    <li>{{p}}</li>
+  </ul>

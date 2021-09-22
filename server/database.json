@@ -1,14 +1,6 @@
 {
   "todos": [
     {
-      "title": "XPS 13",
-      "status": "pending",
-      "description": "",
-      "deadline": "2021-09-26",
-      "priority": "normal",
-      "id": 16
-    },
-    {
       "title": "Laptop",
       "status": "",
       "description": "",
@@ -25,24 +17,28 @@
       "id": 32
     },
     {
-      "title": "Read Book",
-      "description": null,
-      "deadline": "2021-9-29",
+      "title": "Do homework",
       "status": "todo",
-      "priority": "low",
+      "description": "",
+      "deadline": "2021-09-26",
+      "priority": "high",
       "id": 33
     },
     {
-      "title": "Read Book",
-      "description": null,
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 30
-      },
+      "title": "Central Functionality ",
       "status": "todo",
-      "priority": "urgent",
+      "description": "",
+      "deadline": "2021-09-10",
+      "priority": "low",
       "id": 34
+    },
+    {
+      "title": "Hight",
+      "status": "todo",
+      "description": "",
+      "deadline": "2021-09-10",
+      "priority": "urgent",
+      "id": 35
     }
   ],
   "reactive-todos": [

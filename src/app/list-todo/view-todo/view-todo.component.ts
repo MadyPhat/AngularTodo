@@ -20,7 +20,6 @@ export class ViewTodoComponent implements OnInit {
   currentTodo: Todo | undefined;
   currentIndex = -1;
   userInput: string = 'All Todo';
-  order: string = 'status';
 
   @Output("gotoUpdate") gotoUpdate: EventEmitter<number> = new EventEmitter();
 

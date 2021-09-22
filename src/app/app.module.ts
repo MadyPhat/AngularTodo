@@ -10,7 +10,6 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { ListTodoModule } from './list-todo/list-todo.module';
-import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { OrderModule } from 'ngx-order-pipe';
     BrowserAnimationsModule,
     MatSliderModule,
     ListTodoModule,
-    OrderModule
   ],
   exports: [
   ],
