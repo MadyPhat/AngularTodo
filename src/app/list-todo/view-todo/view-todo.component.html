@@ -18,7 +18,7 @@
       <br>
       <h2>{{s | titlecase}}</h2>
     </div>
-    <div class="list-group" style="width: rem;" *ngFor="let todo of todos let i = index"
+    <div class="list-group" style="width: rem;" *ngFor="let todo of todos | orderBy: -order; let i = index"
       [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
       <div [ngClass]="{
         'list-group-item': true,
