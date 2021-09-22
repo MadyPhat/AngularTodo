@@ -22,8 +22,11 @@ export class AddTodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setDefaultValue( form: NgForm){
+  setDefaultStatusValue( form: NgForm){
     form.value.status = 'todo';
+  }
+
+  setDefaultPriorityValue( form: NgForm){
     form.value.priority = 'low';
   }
   saveTodo(data: Todo) {
@@ -41,8 +44,14 @@ export class AddTodoComponent implements OnInit {
 
 
   submitHandler(form: NgForm) {
-    this.setDefaultValue(form);
-    this.saveTodo(form.value);
+    if(form.value.priority !== ''){
+      this.setDefaultStatusValue(form);
+      this.saveTodo(form.value);
+    }else{
+      this.setDefaultStatusValue(form);
+      this.setDefaultPriorityValue(form);
+      this.saveTodo(form.value);
+    }
   }
 
 }

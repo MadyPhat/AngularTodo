@@ -31,6 +31,22 @@
       "deadline": "2021-09-10",
       "priority": "urgent",
       "id": 35
+    },
+    {
+      "title": "Central Functionality ",
+      "status": "todo",
+      "description": "",
+      "deadline": "",
+      "priority": "high",
+      "id": 36
+    },
+    {
+      "title": "LG",
+      "status": "todo",
+      "description": "",
+      "deadline": "",
+      "priority": "medium",
+      "id": 37
     }
   ],
   "reactive-todos": [
