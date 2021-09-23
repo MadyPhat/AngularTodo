@@ -71,7 +71,7 @@
   </div>
 </ng-template>
 
-<ngb-toast *ngIf="show" [delay]="1000" class="bg-success">
+<ngb-toast *ngIf="show" [delay]="1000" class="bg-success" [autohide]="true">
   <strong>Deleted</strong>
 </ngb-toast>
 
@@ -95,7 +95,7 @@
     <br>
     <h2>{{s | titlecase}}</h2>
   </div>
-  <div *ngFor="let p of priority | orderBy: order">
+  <div *ngFor="let p of priority | orderBy:order">
     <div class="container d-flex flex-wrap align-items-start">
       <div *ngFor="let todo of todos let i = index" [class.active]="i == currentIndex"
         (click)="setCurrentTodo(todo, i)">
@@ -116,8 +116,8 @@
               <small>
                 {{todo.priority | titlecase}} / {{todo.status | titlecase}}
               </small>
-              <p *ngIf="todo.description === ''"> <small>No description</small></p>
-              <div *ngIf="todo.description !==''">
+              <div *ngIf="todo.description === null"> <small>No description</small></div>
+              <div *ngIf="todo.description !== null">
                 <div [ngClass]="{'limitTextHeight': !details[i]}">
                   <small>{{todo.description}}</small>
                 </div>

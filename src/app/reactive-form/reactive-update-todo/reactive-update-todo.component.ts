@@ -15,7 +15,6 @@ import { Deadline } from 'src/app/interface/deadline';
 export class ReactiveUpdateTodoComponent implements OnInit {
 
   currentTodo: Todo | undefined;
-  message = '';
   priority: Array<string> = Priority;
   status: Array<string> = Status;
   reactiveForm: any;
@@ -28,24 +27,27 @@ export class ReactiveUpdateTodoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.message ='';
     this.getTodo(this.route.snapshot.paramMap.get('id'));
-    console.log(this.currentTodo);
-
-    this.reactiveForm = this._fb.group({
-      title: [null, [Validators.required]],
-      description: [null],
-      deadline: [null],
-      status: [null],
-      priority: [null]
-    })
   }
+
+
 
   getTodo(id: any){
     this.todoSerive.getATodo(id).subscribe((res: Todo) =>{
       this.currentTodo = res;
+      this.setFormValue();
     },error => {
       console.log(error);
+    })
+  }
+
+  setFormValue(){
+    this.reactiveForm = this._fb.group({
+      title: [this.currentTodo?.title, [Validators.required]],
+      description: [this.currentTodo?.description],
+      deadline: [this.currentTodo?.deadline],
+      status: [this.currentTodo?.status],
+      priority: [this.currentTodo?.priority]
     })
   }
 
@@ -64,7 +66,6 @@ export class ReactiveUpdateTodoComponent implements OnInit {
 
   updateTodo(data: Todo){
     this.todoSerive.updateTodo(this.currentTodo!.id, data).subscribe(()=>{
-      this.message = 'Todo Updated';
       this.router.navigate([`/reactive`]);
     }, (error: any) =>{
       console.log(error);

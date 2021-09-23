@@ -1,26 +1,10 @@
 {
   "todos": [
     {
-      "title": "Laptop",
-      "status": "",
-      "description": "",
-      "deadline": "2021-09-26",
-      "priority": "",
-      "id": 31
-    },
-    {
-      "title": "Laptop",
-      "status": "",
-      "description": "",
-      "deadline": "",
-      "priority": "",
-      "id": 32
-    },
-    {
       "title": "Do homework",
-      "status": "todo",
       "description": "To be thoroughly prepared and informed about something or something, especially in advance of some process, action, or decision. Be sure you do your homework before heading into that meeting; there's a lot at stake, and no one's going to like it if you aren't up to speed.",
-      "deadline": "2021-09-26",
+      "deadline": "2021-9-30",
+      "status": "todo",
       "priority": "low",
       "id": 33
     },
@@ -31,68 +15,30 @@
       "status": "todo",
       "priority": "low",
       "id": 34
-    }
-  ],
-  "reactive-todos": [
-    {
-      "title": "Read Book",
-      "description": null,
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 18
-      },
-      "status": "todo",
-      "priority": "urgent",
-      "id": 2
     },
     {
-      "title": "Finish the project",
-      "description": "Finish all function",
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 30
-      },
-      "status": "todo",
+      "title": "Date",
+      "description": "a social or romantic appointment or engagement.",
+      "deadline": "2021-9-30",
+      "status": "in progress",
       "priority": "medium",
-      "id": 3
+      "id": 36
     },
     {
-      "title": "Do whatever I want",
-      "description": null,
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 25
-      },
-      "status": "in progress",
-      "priority": "low",
-      "id": 4
-    },
-    {
-      "title": "Listen music",
-      "description": "ssong",
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 25
-      },
-      "status": "in progress",
-      "priority": "high",
-      "id": 5
-    },
-    {
-      "title": "typoing",
-      "description": "typing",
-      "deadline": {
-        "year": 2021,
-        "month": 9,
-        "day": 15
-      },
+      "title": "Fix Bugs",
+      "description": "We find what others miss. Our team will manually inspect your website for bugs. Does your website need an outside perspective? We're ready to help. Make Suggestion for Site.",
+      "deadline": "2021-9-29",
       "status": "todo",
-      "priority": "low",
-      "id": 6
+      "priority": "normal",
+      "id": 37
+    },
+    {
+      "title": "Project",
+      "description": null,
+      "deadline": "2021-10-9",
+      "status": "todo",
+      "priority": "high",
+      "id": 38
     }
   ]
 }

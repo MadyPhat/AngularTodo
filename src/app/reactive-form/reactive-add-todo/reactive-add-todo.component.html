@@ -39,8 +39,8 @@
               <div class="col">
                 <div class="form-group">
                   <label for="inputDeadline">Deadline</label>
-                  <input type="date" [ngClass]="{'form-control': true}" formControlName="deadline"
-                    id="inputDeadline" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateToString($event)">
+                  <input type="text" [ngClass]="{'form-control': true}" formControlName="deadline"
+                    id="inputDeadline" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateToString($event)">
                 </div>
               </div>
             </div>
