@@ -95,7 +95,7 @@
     <br>
     <h2>{{s | titlecase}}</h2>
   </div>
-  <div *ngFor="let p of priority | orderBy:order">
+  <div *ngFor="let p of priority | orderBy:-order">
     <div class="container d-flex flex-wrap align-items-start">
       <div *ngFor="let todo of todos let i = index" [class.active]="i == currentIndex"
         (click)="setCurrentTodo(todo, i)">
