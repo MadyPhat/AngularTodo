@@ -1,4 +1,4 @@
-import { Component, EventEmitter,OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Priority } from 'src/app/data/priority';
 import { Status } from 'src/app/data/status';
@@ -20,7 +20,10 @@ export class ViewTodoComponent implements OnInit {
   currentTodo: Todo | undefined;
   currentIndex = -1;
   userInput: string = 'All Todo';
-  order = -this.priority
+  order = -this.priority;
+  details: Array<boolean> = [];
+  show = false;
+
 
   @Output("gotoUpdate") gotoUpdate: EventEmitter<number> = new EventEmitter();
 
@@ -44,7 +47,6 @@ export class ViewTodoComponent implements OnInit {
     this.currentIndex = index;
   }
 
-
   public toggle(element: HTMLElement) {
     element.classList.toggle('d-none');
   }
@@ -63,6 +65,7 @@ export class ViewTodoComponent implements OnInit {
     this.toService.deleteTodo(id).subscribe(res => {
       this.getTodos();
       this.modalService.dismissAll();
+      this.show = true;
     })
   }
 
@@ -88,3 +91,7 @@ export class ViewTodoComponent implements OnInit {
     this.getTodos();
   }
 }
+function debounceTime(arg0: number): import("rxjs").OperatorFunction<string, unknown> {
+  throw new Error('Function not implemented.');
+}
+

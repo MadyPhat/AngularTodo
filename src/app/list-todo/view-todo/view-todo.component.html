@@ -1,30 +1,31 @@
-<div class="container">
-    <div class="row">
-      <label for="userInput" class="col-sm-1"> Filter : </label>
-      <div class="col-sm-3">
-        <select id="userInput" class="form-select" [(ngModel)]="userInput" (change)="filterTodo()">
-          <option [selected]='!userInput' [ngValue]="'All Todo'">All Todo</option>
-          <option *ngFor="let p of priority" [ngValue]="p">{{p | titlecase}}</option>
-        </select>
-      </div>
-      <div class="col-sm-3">
-        <button class="btn btn-info" (click)="reset()">Clear</button>
-      </div>
+<!-- <div class="container">
+  <div class="row">
+    <label for="userInput" class="col-sm-1"> Filter : </label>
+    <div class="col-sm-3">
+      <select id="userInput" class="form-select" [(ngModel)]="userInput" (change)="filterTodo()">
+        <option [selected]='!userInput' [ngValue]="'All Todo'">All Todo</option>
+        <option *ngFor="let p of priority" [ngValue]="p">{{p | titlecase}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-info" (click)="reset()">Clear</button>
     </div>
   </div>
-  
-  <div *ngFor="let s of status">
-    <div class="container">
-      <br>
-      <h2>{{s | titlecase}}</h2>
-    </div>
-    <div *ngFor="let p of priority | orderBy: order">
-      <div class="list-group" style="width: rem;" *ngFor="let todo of todos let i = index"
+</div>
+
+<div *ngFor="let s of status">
+  <div class="container">
+    <br>
+    <h2>{{s | titlecase}}</h2>
+  </div>
+  <div *ngFor="let p of priority | orderBy: order">
+    <div class="list-group" style="width: rem;" *ngFor="let todo of todos let i = index"
       [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
       <div [ngClass]="{
         'list-group-item': true,
         'list-group-item-action': true, 
-        'list-group-item-danger': todo.priority ==='high' || todo.priority ==='urgent'}" *ngIf="todo.status === s && todo.priority === p">
+        'list-group-item-danger': todo.priority ==='high' || todo.priority ==='urgent'}"
+        *ngIf="todo.status === s && todo.priority === p">
         <div class="d-flex w-100 justify-content-between">
           <h5 [ngClass]="{'mb-1': true}">{{todo.title}}</h5>
           <small>
@@ -44,28 +45,97 @@
         </div>
       </div>
     </div>
-    </div>
   </div>
-  
-  <ng-template #confirmDeleteModal let-modal>
-    <div class="modal-body">
-      <div class="row">
-        <div class="d-inline-flex p-2 bd-highlight justify-content-end">
-          <button type="button" class="close btn" (click)="modal.dismiss()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+</div> -->
+
+<ng-template #confirmDeleteModal let-modal>
+  <div class="modal-body">
+    <div class="row">
+      <div class="d-inline-flex p-2 bd-highlight justify-content-end">
+        <button type="button" class="close btn" (click)="modal.dismiss()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <h5 class="mb-1">Are you sure to delete this Todo?</h5>
+    </div>
+    <div class="row">
+      <div class="d-flex justify-content-end">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="deleteTodo(currentTodo!.id)">Delete</button>
         </div>
       </div>
-      <div class="row">
-        <h5 class="mb-1">Are you sure to delete this Todo?</h5>
-      </div>
-      <div class="row">
-        <div class="d-flex justify-content-end">
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
-            <button type="button" class="btn btn-danger" (click)="deleteTodo(currentTodo!.id)">Delete</button>
+    </div>
+  </div>
+</ng-template>
+
+<ngb-toast *ngIf="show" [delay]="1000" class="bg-success">
+  <strong>Deleted</strong>
+</ngb-toast>
+
+<div class="container">
+  <div class="row">
+    <label for="userInput" class="col-sm-1"> Filter : </label>
+    <div class="col-sm-3">
+      <select id="userInput" class="form-select" [(ngModel)]="userInput" (change)="filterTodo()">
+        <option [selected]='!userInput' [ngValue]="'All Todo'">All Todo</option>
+        <option *ngFor="let p of priority" [ngValue]="p">{{p | titlecase}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-info" (click)="reset()">Clear</button>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let s of status">
+  <div class="container">
+    <br>
+    <h2>{{s | titlecase}}</h2>
+  </div>
+  <div *ngFor="let p of priority | orderBy: order">
+    <div class="container d-flex flex-wrap align-items-start">
+      <div *ngFor="let todo of todos let i = index" [class.active]="i == currentIndex"
+        (click)="setCurrentTodo(todo, i)">
+        <div [ngClass]="{
+          'm-1 card': true,
+          'border-secondary': todo.priority !== 'high' && todo.priority !== 'urgent',
+          'bg-danger text-white': todo.priority ==='high' || todo.priority ==='urgent'}"
+          style="width: 20rem; min-height: 10rem" *ngIf="todo.status === s && todo.priority === p">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title mb-1">{{todo.title}}</h5>
+              <div class="btn-group">
+                <a class="btn btn-sm btn-secondary " (click)="goToUpdate(todo.id)">Edit</a>
+                <a (click)="openModal(confirmDeleteModal)" class="btn btn-sm btn-danger">Delete</a>
+              </div>
+            </div>
+            <div class="card-text">
+              <small>
+                {{todo.priority | titlecase}} / {{todo.status | titlecase}}
+              </small>
+              <p *ngIf="todo.description === ''"> <small>No description</small></p>
+              <div *ngIf="todo.description !==''">
+                <div [ngClass]="{'limitTextHeight': !details[i]}">
+                  <small>{{todo.description}}</small>
+                </div>
+                <a type="button" class="btn-link"
+                  (click)="details[i]=!details[i]"><small>{{ details[i] ? 'Read Less': 'Read More' }}</small>
+                </a>
+              </div>
+            </div>
+            <div class="card-text">
+              <small> Deadline :
+                {{todo.deadline | date: 'mediumDate'}}
+              </small>
+            </div>
+            <div class="d-flex justify-content-end mt-auto">
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </ng-template>
+  </div>
+</div>

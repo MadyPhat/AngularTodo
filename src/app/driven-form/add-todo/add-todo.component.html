@@ -1,10 +1,11 @@
 <div class=" container-sm shadow p-3 mb-5 bg-body" style="width: 35rem;">
   <form #todoForm="ngForm">
     <fieldset>
-      <legend>Add Todo</legend>
+      <h3 class="text-primary">Add Todo</h3>
+      <hr>
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="exampleInputTitle" class="form-label mt-4">Title</label>
+          <label for="exampleInputTitle">Title</label>
           <input type="text" ngModel name="title" #title="ngModel" [ngClass]="{'form-control': true, 
           'is-invalid': !title?.valid,
           'is-valid': title?.valid}" required id="InputTitle" aria-describedby="titleHelp" placeholder="Enter title">
@@ -17,12 +18,12 @@
         </div>
 
         <div class="form-group">
-          <label for="description" class="form-label mt-4">Description</label>
+          <label for="description">Description</label>
           <textarea ngModel name="description" class="form-control" id="InputDescription" rows="3"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="deadline" class="form-label mt-4">Deadline : YYYY-MM-DD</label>
+          <label for="deadline">Deadline : YYYY-MM-DD</label>
           <input ngModel name="deadline" id="InputDeadline" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
             #deadline="ngModel" [ngClass]="{'form-control': true, 
           'is-invalid': !deadline?.valid && deadline?.touched,
@@ -35,7 +36,7 @@
         <div class="row">
           <div class="col">
             <div class="form-group">
-              <label for="inputPriority" class="form-label mt-4">Priority</label>
+              <label for="inputPriority">Priority</label>
               <select class="form-select" ngModel name="priority" id="inputPriority" [(ngModel)]='defaultPrioritySelect' >
                 <option *ngFor="let item of priority" [value]="item">{{item}}</option>
               </select>
@@ -44,6 +45,7 @@
         </div>
 
         <br>
+        <hr>
         <div class="d-flex justify-content-end">
           <button type="button" [disabled]="!todoForm.form.valid" class="btn btn-primary"
             (click)="submitHandler(todoForm)">Save</button>

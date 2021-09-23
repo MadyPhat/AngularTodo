@@ -1,6 +1,7 @@
 <div style="width: 500px; margin: auto;">
   <div *ngIf="currentTodo" class="edit-form container-sm shadow p-3 mb-5 bg-body" style="width: 35rem;">
-    <legend>Update</legend>
+    <h3 class="text-primary">Update</h3>
+    <hr>
     <form #todoForm="ngForm">
       <div class="form-group">
         <label for="exampleInputTitle" class="form-label mt-4">Title</label>
@@ -49,6 +50,7 @@
         </div>
       </div>
       <br>
+      <hr>
       <div class="row">
         <div class="d-flex justify-content-end">
           <button type="button" [disabled]="!todoForm.form.valid" class="btn btn-primary"

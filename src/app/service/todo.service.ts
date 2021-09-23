@@ -8,10 +8,6 @@ const _API = 'http://localhost:3000/todos';
   providedIn: 'root'
 })
 export class TodoService {
-  id(id: any, data: any) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor(private httpClient: HttpClient) { }
 
   getAllTodos(): Observable<Todo[]> {

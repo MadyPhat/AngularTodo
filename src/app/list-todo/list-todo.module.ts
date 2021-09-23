@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ViewTodoComponent } from './view-todo/view-todo.component';
 import { FormsModule } from '@angular/forms';
 import { OrderModule } from 'ngx-order-pipe';
+import { NgbAlertModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,9 @@ import { OrderModule } from 'ngx-order-pipe';
   imports: [
   CommonModule,
   FormsModule,
-  OrderModule
+  OrderModule,
+  NgbAlertModule,
+  NgbToastModule
   ],
   exports: [
     ViewTodoComponent

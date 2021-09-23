@@ -16,11 +16,12 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="fnText">Title</label>
-                  <input type="text" [ngClass]="{'form-control': true, 
+                  <label for="inputTitle">Title</label>
+                  <input type="text" [ngClass]="{
+                  'form-control': true, 
                   'is-invalid': !title.valid , 'is-valid': title.valid }"
-                    formControlName="title" id="fnText">
-                  <small *ngIf="title.errors?.required" id="fnHelp"
+                    formControlName="title" id="inputTitle">
+                  <small *ngIf="title.errors?.required" id="titleHelp"
                     class="form-text text-danger custom-invalid-feedback">What do you want to do?</small>
                 </div>
               </div>
@@ -28,16 +29,16 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="lnText">Description</label>
+                  <label for="InputDescription">Description</label>
                   <textarea type="text" [ngClass]="{'form-control': true}" formControlName="description"
-                    id="lnText"></textarea>
+                    id="InputDescription"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="lnText">Deadline</label>
+                  <label for="inputDeadline">Deadline</label>
                   <input type="date" [ngClass]="{'form-control': true}" formControlName="deadline"
                     id="inputDeadline" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateToString($event)">
                 </div>
