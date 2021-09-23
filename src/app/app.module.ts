@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { ListTodoModule } from './list-todo/list-todo.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ListTodoModule } from './list-todo/list-todo.module';
     BrowserAnimationsModule,
     MatSliderModule,
     ListTodoModule,
+    FontAwesomeModule,
   ],
   exports: [
   ],

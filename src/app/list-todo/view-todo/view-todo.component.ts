@@ -4,6 +4,8 @@ import { Priority } from 'src/app/data/priority';
 import { Status } from 'src/app/data/status';
 import { Todo } from 'src/app/interface/todo';
 import { TodoService } from 'src/app/service/todo.service';
+import { faTimesCircle, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-view-todo',
@@ -12,6 +14,9 @@ import { TodoService } from 'src/app/service/todo.service';
 })
 
 export class ViewTodoComponent implements OnInit {
+  faTimesCircle = faTimesCircle;
+  faEdit = faEdit;
+  faTimes = faTimes;
 
   status: Array<string> = Status;
   priority: Array<string> = Priority;

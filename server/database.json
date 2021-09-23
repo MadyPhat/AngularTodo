@@ -3,9 +3,9 @@
     {
       "title": "Do homework",
       "description": "To be thoroughly prepared and informed about something or something, especially in advance of some process, action, or decision. Be sure you do your homework before heading into that meeting; there's a lot at stake, and no one's going to like it if you aren't up to speed.",
-      "deadline": "2021-9-30",
+      "deadline": "2021-09-30",
       "status": "todo",
-      "priority": "low",
+      "priority": "high",
       "id": 33
     },
     {

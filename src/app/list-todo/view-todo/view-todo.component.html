@@ -1,70 +1,23 @@
-<!-- <div class="container">
-  <div class="row">
-    <label for="userInput" class="col-sm-1"> Filter : </label>
-    <div class="col-sm-3">
-      <select id="userInput" class="form-select" [(ngModel)]="userInput" (change)="filterTodo()">
-        <option [selected]='!userInput' [ngValue]="'All Todo'">All Todo</option>
-        <option *ngFor="let p of priority" [ngValue]="p">{{p | titlecase}}</option>
-      </select>
-    </div>
-    <div class="col-sm-3">
-      <button class="btn btn-info" (click)="reset()">Clear</button>
-    </div>
-  </div>
-</div>
 
-<div *ngFor="let s of status">
-  <div class="container">
-    <br>
-    <h2>{{s | titlecase}}</h2>
-  </div>
-  <div *ngFor="let p of priority | orderBy: order">
-    <div class="list-group" style="width: rem;" *ngFor="let todo of todos let i = index"
-      [class.active]="i == currentIndex" (click)="setCurrentTodo(todo, i)">
-      <div [ngClass]="{
-        'list-group-item': true,
-        'list-group-item-action': true, 
-        'list-group-item-danger': todo.priority ==='high' || todo.priority ==='urgent'}"
-        *ngIf="todo.status === s && todo.priority === p">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 [ngClass]="{'mb-1': true}">{{todo.title}}</h5>
-          <small>
-            {{todo.priority | titlecase}}
-          </small>
-        </div>
-        <p class="mb-1">{{todo.description}}</p>
-        <p>Status : <strong>{{todo.status | titlecase}}</strong></p>
-        <small class="text-muted"> Deadline :
-          {{todo.deadline | date: 'fullDate'}}
-        </small>
-        <div class="d-flex justify-content-end">
-          <div class="btn-group">
-            <a class="btn btn-secondary" (click)="goToUpdate(todo.id)">Edit</a>
-            <a (click)="openModal(confirmDeleteModal)" class="btn btn-danger">Delete</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <ng-template #confirmDeleteModal let-modal>
   <div class="modal-body">
     <div class="row">
-      <div class="d-inline-flex p-2 bd-highlight justify-content-end">
-        <button type="button" class="close btn" (click)="modal.dismiss()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="d-inline-flex justify-content-between">
+        <h6 class="text-danger">Warning!!</h6>
+        <a type="button" class="btn button-card" (click)="modal.dismiss()">
+          <fa-icon [icon]="faTimes" size="lg"></fa-icon>
+        </a>
       </div>
     </div>
     <div class="row">
-      <h5 class="mb-1">Are you sure to delete this Todo?</h5>
+      <h5 class="align-center">Are you sure to delete this Todo?</h5>
     </div>
     <div class="row">
       <div class="d-flex justify-content-end">
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
-          <button type="button" class="btn btn-danger" (click)="deleteTodo(currentTodo!.id)">Delete</button>
+          <a type="button" class="btn btn-sm btn-secondary" (click)="modal.dismiss()">Cancel</a>
+          <a type="button" class="btn btn-sm btn-danger" (click)="deleteTodo(currentTodo!.id)">Delete</a>
         </div>
       </div>
     </div>
@@ -108,8 +61,8 @@
             <div class="d-flex justify-content-between">
               <h5 class="card-title mb-1">{{todo.title}}</h5>
               <div class="btn-group">
-                <a class="btn btn-sm btn-secondary " (click)="goToUpdate(todo.id)">Edit</a>
-                <a (click)="openModal(confirmDeleteModal)" class="btn btn-sm btn-danger">Delete</a>
+                <a class="btn button-card" (click)="goToUpdate(todo.id)"><fa-icon [icon]="faEdit" size="lg"></fa-icon></a>
+                <a class="btn button-card" (click)="openModal(confirmDeleteModal)"><fa-icon [icon]="faTimesCircle" size="lg"></fa-icon></a>
               </div>
             </div>
             <div class="card-text">
