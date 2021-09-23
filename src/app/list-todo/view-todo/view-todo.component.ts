@@ -20,7 +20,6 @@ export class ViewTodoComponent implements OnInit {
   currentTodo: Todo | undefined;
   currentIndex = -1;
   userInput: string = 'All Todo';
-  order: Array<string> = [];
   details: Array<boolean> = [];
   show = false;
 
@@ -33,7 +32,6 @@ export class ViewTodoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.order = this.priority;
     this.getTodos();
   }
 
